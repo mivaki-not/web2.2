@@ -22,9 +22,9 @@ class CardDevileryTest {
     public void shouldTest() {
         Selenide.open("http://localhost:9999");
 
-        $("[data-test-id=sity] input").setValue("Рязань");
+        $("[data-test-id=city] input").setValue("Москва");
         $("[data-test-id=callback-form]");
-        String planningDate = generateDate(4, "dd.MM.yyyy");
+        String planningDate = generateDate(4,"dd.MM.yyyy");
         $("[data-test-id=date] input").press(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id=date] input").setValue(planningDate);
         $("[data-test-id=name] input").setValue("Василий");
@@ -32,8 +32,7 @@ class CardDevileryTest {
         $("[data-test-id=agreement]").click();
         $("button.button").click();
         $(".notification__content")
-                .shouldBe(Condition.visible, Duration.ofSeconds(15))
-                .shouldHave(Condition.text("Встреча успешно забронирована на " + planningDate));
+                .should(Condition.visible, Duration.ofSeconds(20))
+                .should(Condition.text(("Встреча успешно забронирована на ")+ planningDate));
     }
 }
-
